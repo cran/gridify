@@ -48,8 +48,9 @@ overflow: visible;
 }
 </style>
 <style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -60,7 +61,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -449,7 +450,7 @@ the scenes:</p>
 <span id="cb2-45"><a href="#cb2-45" tabindex="-1"></a><span class="co">#&gt;             c(&quot;cm&quot;, &quot;cm&quot;, &quot;cm&quot;, &quot;null&quot;, &quot;cm&quot;, &quot;cm&quot;)), widths = grid::unit(c(0.33, </span></span>
 <span id="cb2-46"><a href="#cb2-46" tabindex="-1"></a><span class="co">#&gt;         0.33, 0.33), c(&quot;npc&quot;, &quot;npc&quot;, &quot;npc&quot;)))))))</span></span>
 <span id="cb2-47"><a href="#cb2-47" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;env&quot;)</span></span>
-<span id="cb2-48"><a href="#cb2-48" tabindex="-1"></a><span class="co">#&gt; &lt;environment: 0x15c49d820&gt;</span></span></code></pre></div>
+<span id="cb2-48"><a href="#cb2-48" tabindex="-1"></a><span class="co">#&gt; &lt;environment: 0x1048562e8&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Retrieve the main object- either a figure or table</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>OBJECT <span class="ot">&lt;-</span> <span class="fu">attr</span>(grid_call_behind, <span class="st">&quot;env&quot;</span>)[[<span class="st">&quot;OBJECT&quot;</span>]]</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># Redraw the graphics by eval of the grid call</span></span>

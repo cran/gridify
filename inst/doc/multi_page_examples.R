@@ -117,46 +117,28 @@ library(gt)
 table_cols <- c("cyl", "vs", "am", "drat", "qsec") # Columns that appear in final output
 df <- mtcars[, table_cols]
 rows_per_page <- 10
+
+# Use the helper function to split the table
+pages <- paginate_table(
+  df,
+  rows_per_page = rows_per_page,
+  fill_empty = " "  # Optional: fills last page with a string for consistent positioning
+)
+
+number_of_pages <- length(pages)
+
+## ----fig.width=7.2, fig.height=7----------------------------------------------
+# Define styling parameters
 row_height_pixels <- 10
 font_size <- 12
 font_type <- "serif"
 
-number_of_rows <- nrow(df)
-number_of_cols <- ncol(df)
-number_of_pages <- ceiling(number_of_rows / rows_per_page)
-
-## -----------------------------------------------------------------------------
-# Allocate each row to a page
-df$page_number <- rep(
-  1:number_of_pages,
-  each = rows_per_page,
-  length.out = number_of_rows
-)
-
-# Split original table into smaller pages
-pages <- split(
-  df,
-  df$page_number
-)
-
-## -----------------------------------------------------------------------------
-last_page <- pages[[number_of_pages]]
-last_page_nrows <- nrow(last_page)
-if (last_page_nrows < rows_per_page) {
-  rows_difference <- rows_per_page - last_page_nrows
-  append_table <- data.frame(matrix(" ", nrow = rows_difference, ncol = ncol(df)))
-  colnames(append_table) <- colnames(df)
-  pages[[number_of_pages]] <- rbind(last_page, append_table)
-}
-
-## ----fig.width=7.2, fig.height=7----------------------------------------------
 results_list <- list()
 for (iter in seq_along(pages)) {
   gt_input <- gt(pages[[iter]]) %>%
     tab_options(
-      table.width = pct(100),
+      table.width = pct(80),
       data_row.padding = px(row_height_pixels),
-      table_body.hlines.color = "white",
       page.numbering = TRUE,
       table.font.size = font_size,
       table.font.names = font_type
@@ -164,7 +146,7 @@ for (iter in seq_along(pages)) {
 
   results_list[[iter]] <- gridify(
     gt_input,
-    layout = pharma_layout_A4()
+    layout = pharma_layout_A4(global_gpar = grid::gpar(fontfamily = font_type))
   ) %>%
     set_cell("header_left_1", "My Company") %>%
     set_cell("header_left_2", "<PROJECT> / <INDICATION>") %>%

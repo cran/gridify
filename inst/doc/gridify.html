@@ -48,8 +48,9 @@ overflow: visible;
 }
 </style>
 <style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -60,7 +61,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -393,11 +394,12 @@ result is always an image.</p>
 </div>
 <div id="installation" class="section level2">
 <h2>Installation</h2>
-<p>If <code>gridify</code> is not yet on CRAN, you can install it from
-Pharmaverse GitHub (example):</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;pharmaverse/gridify&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>, <span class="at">build_manual =</span> <span class="cn">TRUE</span>, <span class="at">build_vignettes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p>or from the source after <code>git clone</code>, for example:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;gridify&quot;</span>)</span></code></pre></div>
+<p>You can install the newest release version from CRAN:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;gridify&quot;</span>)</span></code></pre></div>
+<p>Or you can install the newest development version from Pharmaverse
+GitHub (example):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># install.packages(&quot;remotes&quot;)</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;pharmaverse/gridify&quot;</span>, <span class="at">build_manual =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Then load <strong>gridify</strong>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(gridify)</span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span></code></pre></div>
@@ -742,7 +744,7 @@ displays the final layout in your R session, and invisibly returns the
 <span id="cb10-69"><a href="#cb10-69" tabindex="-1"></a><span class="co">#&gt;             &quot;cm&quot;, &quot;null&quot;, &quot;cm&quot;, &quot;lines&quot;, &quot;cm&quot;, &quot;cm&quot;)), widths = grid::unit(c(0.33, </span></span>
 <span id="cb10-70"><a href="#cb10-70" tabindex="-1"></a><span class="co">#&gt;         0.33, 0.33), c(&quot;npc&quot;, &quot;npc&quot;, &quot;npc&quot;)))))))</span></span>
 <span id="cb10-71"><a href="#cb10-71" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;env&quot;)</span></span>
-<span id="cb10-72"><a href="#cb10-72" tabindex="-1"></a><span class="co">#&gt; &lt;environment: 0x125950cc8&gt;</span></span></code></pre></div>
+<span id="cb10-72"><a href="#cb10-72" tabindex="-1"></a><span class="co">#&gt; &lt;environment: 0x1053d71a8&gt;</span></span></code></pre></div>
 <p><code>gridify</code> uses meta-programming to capture all
 <code>grid</code> calls needed to assemble your layout. That means you
 can retrieve or audit exactly how the figure or table is constructed.
