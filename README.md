@@ -26,7 +26,8 @@ different inputs:
 
 **grob**, **gtable**, **ggplot**, **flextable**, **gt**,
 **base R plots (by formula)**  
-Whilst **rtables** are not directly supported, we can use **rtables** with `gridify` by first converting them to **flextable**.
+
+Whilst **rtables** are not directly supported, we can use **rtables** with `gridify` by first converting them to **flextable** (with **rtables.officer**).
 
 As `gridify` is based on the graphical tool **grid**, any figure or table
 inputs are converted to a `grob` object in `gridify` and the result of using
@@ -74,7 +75,10 @@ tab <- gt::gt(head(mtcars, n = 10))  |>
     table.width = gt::pct(100),
     data_row.padding = gt::px(10),
     table_body.hlines.color = "white",
-    table.font.size = 12
+    # gt font size is in pixels
+    # Multiply points by 96/72 to get pixels
+    table.font.size = 10 * 96 / 72,
+    table.font.names = "sans"
   )
 
 # Use `gridify()` to create a `gridify` object
@@ -83,7 +87,7 @@ gridify_object <- gridify(
   # Choose a layout (predefined or custom)
   layout = pharma_layout_base(
     margin = grid::unit(c(0.5, 0.5, 0.5, 0.5), "inches"),
-    global_gpar = grid::gpar(fontfamily = "serif", fontsize = 10)
+    global_gpar = grid::gpar(fontfamily = "sans", fontsize = 10)
   )
 )
 # Print the `gridify` object to see empty cells

@@ -181,48 +181,48 @@ g <- gridify(object = gt_obj, layout = pharma_layout_letter()) %>%
 
 print(g)
 
-## ----message = FALSE----------------------------------------------------------
-library(rtables)
-rtabl <- rtables::basic_table(main_footer = " ") %>%
-  rtables::split_cols_by("Species") %>%
-  rtables::analyze(
-    c("Sepal.Length", "Sepal.Width", "Petal.Length"),
-    function(x, ...) {
-      rtables::in_rows(
-        "Mean (sd)" = c(mean(x), stats::sd(x)),
-        "Median" = median(x),
-        "Min - Max" = range(x),
-        .formats = c("xx.xx (xx.xx)", "xx.xx", "xx.xx - xx.xx")
-      )
-    }
-  ) %>%
-  rtables::build_table(iris)
+## ----eval=FALSE---------------------------------------------------------------
+# library(rtables)
+# rtabl <- rtables::basic_table(main_footer = " ") %>%
+#   rtables::split_cols_by("Species") %>%
+#   rtables::analyze(
+#     c("Sepal.Length", "Sepal.Width", "Petal.Length"),
+#     function(x, ...) {
+#       rtables::in_rows(
+#         "Mean (sd)" = c(mean(x), stats::sd(x)),
+#         "Median" = median(x),
+#         "Min - Max" = range(x),
+#         .formats = c("xx.xx (xx.xx)", "xx.xx", "xx.xx - xx.xx")
+#       )
+#     }
+#   ) %>%
+#   rtables::build_table(iris)
 
-## -----------------------------------------------------------------------------
-library(rtables.officer)
+## ----eval=FALSE---------------------------------------------------------------
+# library(rtables.officer)
+# 
+# ft <- rtables.officer::tt_to_flextable(rtabl, theme = NULL)
 
-ft <- rtables.officer::tt_to_flextable(rtabl, theme = NULL)
+## ----eval=FALSE---------------------------------------------------------------
+# ft <- flextable::font(ft, fontname = "serif", part = "all")
 
-## -----------------------------------------------------------------------------
-ft <- flextable::font(ft, fontname = "serif", part = "all")
-
-## ----fig.width = 7, fig.height = 5.5------------------------------------------
-g <- gridify(ft, layout = pharma_layout_A4()) %>%
-  set_cell("header_left_1", "My Company") %>%
-  set_cell("header_left_2", "PROJECT") %>%
-  set_cell("header_left_3", "STUDY") %>%
-  set_cell("header_right_1", "CONFIDENTIAL") %>%
-  set_cell("header_right_2", "Draft") %>%
-  set_cell("header_right_3", "Data Cut-off: 2000-01-01") %>%
-  set_cell("output_num", "<Table> xx.xx.xx") %>%
-  set_cell("title_1", "Summary Table for Iris Dataset") %>%
-  set_cell("note", "Note") %>%
-  set_cell("references", "References") %>%
-  set_cell("footer_left", sprintf("Program: My Programme, %s at %s", Sys.Date(), format(Sys.time(), "%H:%M"))) %>%
-  set_cell("footer_right", "Page 1 of 1") %>%
-  set_cell("watermark", "DRAFT")
-
-print(g)
+## ----eval=FALSE, fig.width = 7, fig.height = 5.5------------------------------
+# g <- gridify(ft, layout = pharma_layout_A4()) %>%
+#   set_cell("header_left_1", "My Company") %>%
+#   set_cell("header_left_2", "PROJECT") %>%
+#   set_cell("header_left_3", "STUDY") %>%
+#   set_cell("header_right_1", "CONFIDENTIAL") %>%
+#   set_cell("header_right_2", "Draft") %>%
+#   set_cell("header_right_3", "Data Cut-off: 2000-01-01") %>%
+#   set_cell("output_num", "<Table> xx.xx.xx") %>%
+#   set_cell("title_1", "Summary Table for Iris Dataset") %>%
+#   set_cell("note", "Note") %>%
+#   set_cell("references", "References") %>%
+#   set_cell("footer_left", sprintf("Program: My Programme, %s at %s", Sys.Date(), format(Sys.time(), "%H:%M"))) %>%
+#   set_cell("footer_right", "Page 1 of 1") %>%
+#   set_cell("watermark", "DRAFT")
+# 
+# print(g)
 
 ## -----------------------------------------------------------------------------
 fig_obj <- ggplot2::ggplot(data = mtcars, ggplot2::aes(x = mpg, y = wt)) +
