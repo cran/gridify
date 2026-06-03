@@ -383,6 +383,65 @@ options(gridify.adjust_height.line = 0.7)
 
 print(g)
 
+## ----fig.width = 7, fig.height = 5--------------------------------------------
+options(gridify.adjust_height.line = NULL)
+
+p <- ggplot(mtcars, aes(mpg, wt)) +
+  geom_point() +
+  theme_minimal()
+
+make_layout <- function(object_vjust = 0.5) {
+  gridifyLayout(
+    nrow = 3, ncol = 1,
+    heights = grid::unit(c(2, 10, 2), "cm"),
+    widths  = grid::unit(1, "npc"),
+    margin  = grid::unit(c(0.05, 0.05, 0.05, 0.05), "npc"),
+    adjust_height = FALSE,
+    object  = gridifyObject(row = 2, col = 1, height = 0.4, vjust = object_vjust),
+    cells   = gridifyCells(
+      title  = gridifyCell(row = 1, col = 1),
+      footer = gridifyCell(row = 3, col = 1)
+    )
+  )
+}
+
+# Default: object centered in the available space
+gridify(p, layout = make_layout()) %>%
+  set_cell("title", "object_vjust = 0.5 (default behaviour)") %>%
+  set_cell("footer", "Footer")
+
+## ----fig.width = 7, fig.height = 5--------------------------------------------
+# Anchored to the top of the row
+gridify(p, layout = make_layout(object_vjust = 1)) %>%
+  set_cell("title", "object_vjust = 1 (anchored to the top)") %>%
+  set_cell("footer", "Footer")
+
+## ----fig.height = 5.5---------------------------------------------------------
+# flextable anchored to the top of the object row
+ft_top <- flextable::flextable(head(mtcars[c("mpg", "wt", "cyl")], 4))
+
+gridify(
+  object = ft_top,
+  layout = pharma_layout_letter(object_vjust = 1)
+) %>%
+  set_cell("output_num", "<Table> xx.xx.xx") %>%
+  set_cell("title_1", "Anchored flextable (object_vjust = 1)") %>%
+  set_cell("note", "<Note or Footnotes>") %>%
+  set_cell("footer_left", "Program: <PROGRAM NAME>, YYYY-MM-DD at HH:MM")
+
+## ----fig.height = 6-----------------------------------------------------------
+# gt table anchored to the top of the object row
+gt_top <- gt::gt(head(mtcars[c("mpg", "wt", "cyl")], 4))
+
+gridify(
+  object = gt_top,
+  layout = pharma_layout_letter(object_vjust = 1)
+) %>%
+  set_cell("output_num", "<Table> xx.xx.xx") %>%
+  set_cell("title_1", "Anchored gt table (object_vjust = 1)") %>%
+  set_cell("note", "<Note or Footnotes>") %>%
+  set_cell("footer_left", "Program: <PROGRAM NAME>, YYYY-MM-DD at HH:MM")
+
 ## ----eval = FALSE-------------------------------------------------------------
 # gridify_obj <- gridify(
 #   object = ggplot2::ggplot(data = mtcars, ggplot2::aes(x = mpg, y = wt)) +

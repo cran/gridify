@@ -4,6 +4,8 @@
 [![Codecov test coverage](https://codecov.io/gh/pharmaverse/gridify/graph/badge.svg)](https://app.codecov.io/gh/pharmaverse/gridify)
 [![pharmaverse gridify Badge](http://pharmaverse.org/shields/gridify.svg)](https://pharmaverse.org)
 [![CRAN status](https://www.r-pkg.org/badges/version/gridify)](https://CRAN.R-project.org/package=gridify)
+[![status: active](https://github.com/GIScience/badges/raw/master/status/active.svg)](https://github.com/GIScience/badges#active)
+
 
 ## Overview
 
@@ -31,7 +33,11 @@ Whilst **rtables** are not directly supported, we can use **rtables** with `grid
 
 As `gridify` is based on the graphical tool **grid**, any figure or table
 inputs are converted to a `grob` object in `gridify` and the result of using
-`gridify` is always a graphical image.
+`gridify` is always a graphical image by design. By unifying
+tables and figures into scalable vector graphics, `gridify` locks the
+layout so it cannot break across environments — no shifting columns, no
+reflowing text. The output is stable while the text stays clear, searchable, 
+and copy-able at any zoom level.
 
 ## Installation
 
@@ -141,6 +147,28 @@ For more information please visit the following vignettes:
   `vignette("transparency", package = "gridify")` - How to extract the
   raw grid code to reproduce a `gridify` object.
 
+## Non Editable Outputs
+
+`gridify` outputs are graphical — they **cannot be hand-edited** like
+Word or Excel. Once a PDF or PNG is produced, the content is locked:
+nothing to retype, nothing to rephrase. Unlike Word/RTF, the layout
+will not reflow or break when opened on a different machine. This is
+useful in validated environments where any manual change after
+generation is a compliance issue, and especially for final eCTD
+submissions where formatting must be pixel-stable.
+
+## PDF Text is Still Searchable
+
+Because `gridify` uses R's vector graphics engine, text in PDFs
+(exported with `export_to()`) is **real text**, not a flat image.
+Reviewers can:
+
+- use Ctrl+F / Cmd+F to search,
+- copy & paste values for checks,
+- zoom in without losing clarity.
+
+So the output is uneditable *and* searchable at the same time.
+
 ## Related packages
 
 Other packages exist which add headers, footers, and other elements to figures and tables; most of the input classes to `gridify` already support these features. 
@@ -158,4 +186,4 @@ By contributing to this project, you agree to abide by its terms.
 
 Along with the authors and contributors, thanks to the following people for their support:
 
-Alberto Montironi, Jonathan Bleier, Cynthia McShea, Nils Penard, Oswald Dallimore, Laetitia Lemoine, Daniel Vicencio Perez, Richard Abdy
+Alberto Montironi, Jonathan Bleier, Cynthia McShea, Nils Penard, Oswald Dallimore, Laetitia Lemoine, Daniel Vicencio Perez, Richard Abdy, Sophie Lee
